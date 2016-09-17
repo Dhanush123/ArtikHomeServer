@@ -1,0 +1,19 @@
+{
+  "name": "artik-home-server",
+  "version": "0.0.1",
+  "description": "Server code for communicating between ARTIK and other IoT devices.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tejashah88/ArtikHomeServer.git"
+  },
+  "author": "Tejas Shah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tejashah88/ArtikHomeServer/issues"
+  },
+  "homepage": "https://github.com/tejashah88/ArtikHomeServer#readme"
+}
