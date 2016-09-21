@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tejashah88/ArtikHomeServer#readme",
   "dependencies": {
-    "node-hue-api": "^2.2.0"
+    "alexa-utils": "^0.2.4",
+    "firebase": "^3.4.0"
   }
 }
