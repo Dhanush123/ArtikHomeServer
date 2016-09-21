@@ -26,7 +26,7 @@ api.setLightState(5, state)
     .done();
 */
 
-var ArtikCloud = require('artikcloud-js');
+/*var ArtikCloud = require('artikcloud-js');
 
 var defaultClient = ArtikCloud.ApiClient.default;
 
@@ -46,4 +46,4 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getAvailableManifestVersions(deviceTypeId, callback);
+api.getAvailableManifestVersions(deviceTypeId, callback);*/

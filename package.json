@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tejashah88/ArtikHomeServer/issues"
   },
-  "homepage": "https://github.com/tejashah88/ArtikHomeServer#readme"
+  "homepage": "https://github.com/tejashah88/ArtikHomeServer#readme",
+  "dependencies": {
+    "node-hue-api": "^2.2.0"
+  }
 }
