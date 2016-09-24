@@ -69,7 +69,7 @@ var app = alexa.app("ArtikHome")
 					var resAirQuality = "Your home's air quality " + resFromAirQuality(airQuality);
 					var resTemperature = "Your home's temperature is " + temperature + " fahrenheit.";
 					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
-						.endSession(false);
+						.endSession(false)
 						.send();
 				});
 		}
