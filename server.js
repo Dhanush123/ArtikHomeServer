@@ -82,7 +82,7 @@ var app = alexa.app("ForceHome")
 			res.prompt(response).send();
 		}
 	})
-	.onIntent("EndSession", (req, res) => {
+	.onIntent("UnlinkDevice", (req, res) => {
 		deviceRef = null;
 		devId = -1;
 		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
