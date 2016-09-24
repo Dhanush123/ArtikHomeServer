@@ -18,6 +18,8 @@
   "homepage": "https://github.com/tejashah88/ArtikHomeServer#readme",
   "dependencies": {
     "alexa-utils": "^0.2.4",
-    "firebase": "^3.4.0"
+    "file-exists": "^2.0.0",
+    "firebase": "^3.4.0",
+    "randomstring": "^1.1.5"
   }
 }
