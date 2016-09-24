@@ -55,7 +55,7 @@ var app = alexa.app("ForceHome")
 					var soilMoisture = snapshot.child("soil-moisture").val();
 					var airQuality = snapshot.child("air-quality").val();
 					var temperature = snapshot.child("temperature").val();
-					var resSoilMoisture = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
+					var resSoilMoisture = "Your plant's soil humidity is " + soilMoisture + "%."
 					var resAirQuality = " Your home's air quality " + resFromAirQuality(airQuality);
 					var resTemperature = " Your home's temperature is " + temperature + " fahrenheit.";
 					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
@@ -72,7 +72,7 @@ var app = alexa.app("ForceHome")
 					
 					if (device == "plants") {
 						var soilMoisture = snapshot.child("soil-moisture").val();
-						response = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
+						response = "Your plant's soil humidity is " + soilMoisture + "%."
 					} else if (device == "fridge") {
 						var temperature = snapshot.child("temperature").val();
 						response = "Your home's temperature is " + temperature + " fahrenheit.";
