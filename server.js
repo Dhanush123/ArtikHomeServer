@@ -52,7 +52,7 @@ var app = alexa.app("ArtikHome")
 			.send();
 	})
 	.onIntent("StartSession", (req, res) => {
-		var devId = req.intent.slots("devId");
+		var devId = req.intent.slot("devId");
 		deviceRef = db.ref("devices/ARTIK-" + devId);
 		res.prompt("Session with ARTIK-" + devId + " is now live!")
 			.endSession(false)
@@ -76,7 +76,7 @@ var app = alexa.app("ArtikHome")
 	})
 	.onIntent("DeviceStatus", (req, res) => {
 		if (!handleNoSession()) {
-			var device = req.intent.slots("device");
+			var device = req.intent.slot("device");
 			var response = "Unknown device requested!";
 			
 			if (device == "plants") {
