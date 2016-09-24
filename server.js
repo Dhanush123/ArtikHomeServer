@@ -12,16 +12,7 @@ firebase.initializeApp(config);
 
 var db = firebase.database();
 var deviceRef = null;
-
-/*
--StartSession
--OverallStatus
--DeviceStatus
-  -device -> "AMAZON.LITERAL"
--AMAZON.HelpIntent
--AMAZON.StopIntent
--AMAZON.CancelIntent
-*/
+var devId = -1;
 
 var handleNoSession = function(res) {
 	if (!deviceRef) {
@@ -44,18 +35,17 @@ var resFromAirQuality = function(value) {
 	}
 }
 
-var app = alexa.app("ArtikHome")
+var app = alexa.app("ForceHome")
 	.onLaunch((req, res) => {
-		res.prompt("Welcome to the ARTIK home app! What do you want to do?")
-			.reprompt("What would you like ARTIK HOME to do?")
+		res.prompt("Welcome to the Force home app! What do you want to do?")
+			.reprompt("What would you like Force Home to do?")
 			.endSession(false)
 			.send();
 	})
-	.onIntent("StartSession", (req, res) => {
-		var devId = req.intent.slot("devId");
+	.onIntent("LinkDevice", (req, res) => {
+		devId = req.intent.slot("devId");
 		deviceRef = db.ref("devices/ARTIK-" + devId);
-		res.prompt("Session with ARTIK-" + devId + " is now online!")
-			.endSession(false)
+		res.prompt("ARTIK device " + devId + " is linked!")
 			.send();
 	})
 	.onIntent("OverallStatus", (req, res) => {
@@ -69,7 +59,6 @@ var app = alexa.app("ArtikHome")
 					var resAirQuality = " Your home's air quality " + resFromAirQuality(airQuality);
 					var resTemperature = " Your home's temperature is " + temperature + " fahrenheit.";
 					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
-						.endSession(false)
 						.send();
 				});
 		}
@@ -90,30 +79,28 @@ var app = alexa.app("ArtikHome")
 				response = "Your home's air quality " + resFromAirQuality(airQuality);			
 			}
 			
-			res.prompt(response)
-				.endSession(false)
-				.send();
+			res.prompt(response).send();
 		}
 	})
 	.onIntent("EndSession", (req, res) => {
 		deviceRef = null;
-		res.prompt("Thank you for using the ARTIK home. Goodbye!")
-			.endSession(true)
-			.send();
+		devId = -1;
+		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
 	})
 	.onIntent("AMAZON.StopIntent", function(req, res) {
 		deviceRef = null;
-		res.endSession(true).send();
+		devId = -1
+		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
 	})
 	.onIntent("AMAZON.CancelIntent", function(req, res) {
 		deviceRef = null;
-		res.endSession(true).send();
+		devId = -1;
+		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
 	})
 	.onSessionEnd((req, res) => {
 		deviceRef = null;
-		res.prompt("Thank you for using the ARTIK home. Goodbye!")
-			.endSession(true)
-			.send();
+		devId = -1;
+		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
 	})
 	.host("/api", PORT, false);
 
