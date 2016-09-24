@@ -62,12 +62,12 @@ var app = alexa.app("ArtikHome")
 		if (!handleNoSession()) {
 			deviceRef.once("value")
 				.then((snapshot) => {
-					var soilMoisture = snapshot.child("soil-moisture");
-					var airQuality = snapshot.child("air-quality");
-					var temperature = snapshot.child("temperature");
-					var resSoilMoisture = "Your plant's soil humidity is " + (soilMoisture.val() * 100.0 / 1023.0) + "%."
-					var resAirQuality = "Your home's air quality " + resFromAirQuality(airQuality.val());
-					var resTemperature = "Your home's temperature is " + temperature.val() + " fahrenheit.";
+					var soilMoisture = snapshot.child("soil-moisture").val();
+					var airQuality = snapshot.child("air-quality").val();
+					var temperature = snapshot.child("temperature").val();
+					var resSoilMoisture = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
+					var resAirQuality = " Your home's air quality " + resFromAirQuality(airQuality);
+					var resTemperature = " Your home's temperature is " + temperature + " fahrenheit.";
 					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
 						.endSession(false)
 						.send();
@@ -80,13 +80,13 @@ var app = alexa.app("ArtikHome")
 			var response = "Unknown device requested!";
 			
 			if (device == "plants") {
-				var soilMoisture = snapshot.child("soil-moisture");
+				var soilMoisture = snapshot.child("soil-moisture").val();
 				response = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
 			} else if (device == "fridge") {
-				var temperature = snapshot.child("temperature");
+				var temperature = snapshot.child("temperature").val();
 				response = "Your home's temperature is " + temperature + " fahrenheit.";
 			} else if (device == "air quality") {
-				var airQuality = snapshot.child("air-quality");
+				var airQuality = snapshot.child("air-quality").val();
 				response = "Your home's air quality " + resFromAirQuality(airQuality);			
 			}
 			
