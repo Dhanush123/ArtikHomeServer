@@ -65,21 +65,24 @@ var app = alexa.app("ForceHome")
 	})
 	.onIntent("DeviceStatus", (req, res) => {
 		if (!handleNoSession()) {
-			var device = req.intent.slot("device");
-			var response = "Unknown device requested!";
-			
-			if (device == "plants") {
-				var soilMoisture = snapshot.child("soil-moisture").val();
-				response = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
-			} else if (device == "fridge") {
-				var temperature = snapshot.child("temperature").val();
-				response = "Your home's temperature is " + temperature + " fahrenheit.";
-			} else if (device == "air quality") {
-				var airQuality = snapshot.child("air-quality").val();
-				response = "Your home's air quality " + resFromAirQuality(airQuality);			
-			}
-			
-			res.prompt(response).send();
+			deviceRef.once("value")
+				.then((snapshot) => {
+					var device = req.intent.slot("device");
+					var response = "Unknown device requested!";
+					
+					if (device == "plants") {
+						var soilMoisture = snapshot.child("soil-moisture").val();
+						response = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
+					} else if (device == "fridge") {
+						var temperature = snapshot.child("temperature").val();
+						response = "Your home's temperature is " + temperature + " fahrenheit.";
+					} else if (device == "air quality") {
+						var airQuality = snapshot.child("air-quality").val();
+						response = "Your home's air quality " + resFromAirQuality(airQuality);			
+					}
+					
+					res.prompt(response).send();
+			});
 		}
 	})
 	.onIntent("UnlinkDevice", (req, res) => {
