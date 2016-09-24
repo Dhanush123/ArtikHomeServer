@@ -65,9 +65,9 @@ var app = alexa.app("ArtikHome")
 					var soilMoisture = snapshot.child("soil-moisture");
 					var airQuality = snapshot.child("air-quality");
 					var temperature = snapshot.child("temperature");
-					var resSoilMoisture = "Your plant's soil humidity is " + (soilMoisture * 100.0 / 1023.0) + "%."
-					var resAirQuality = "Your home's air quality " + resFromAirQuality(airQuality);
-					var resTemperature = "Your home's temperature is " + temperature + " fahrenheit.";
+					var resSoilMoisture = "Your plant's soil humidity is " + (soilMoisture.val() * 100.0 / 1023.0) + "%."
+					var resAirQuality = "Your home's air quality " + resFromAirQuality(airQuality.val());
+					var resTemperature = "Your home's temperature is " + temperature.val() + " fahrenheit.";
 					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
 						.endSession(false)
 						.send();
