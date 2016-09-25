@@ -16,7 +16,7 @@ var devId = -1;
 
 var handleNoSession = function(res) {
 	if (devId == -1) {
-		res.prompt("Sorry, but you have not started a session with an ARTIK.").send();
+		res.prompt("Sorry, but you have not started a session with an ARTIK device.").send();
 		return true;
 	} else {
 		return false;
