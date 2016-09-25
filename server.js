@@ -15,7 +15,7 @@ var deviceRef = null;
 var devId = -1;
 
 var handleNoSession = function(res) {
-	if (!deviceRef) {
+	if (devId == -1) {
 		res.prompt("Sorry, but you have not started a session with an ARTIK.").send();
 		return true;
 	} else {
@@ -48,7 +48,7 @@ var app = alexa.app("ForceHome")
 		res.prompt("ARTIK device " + devId + " is linked!").send();
 	})
 	.onIntent("OverallStatus", (req, res) => {
-		if (!handleNoSession()) {
+		if (!handleNoSession(res)) {
 			deviceRef.once("value")
 				.then((snapshot) => {
 					var soilMoisture = snapshot.child("soil-moisture").val();
@@ -62,7 +62,7 @@ var app = alexa.app("ForceHome")
 		}
 	})
 	.onIntent("DeviceStatus", (req, res) => {
-		if (!handleNoSession()) {
+		if (!handleNoSession(res)) {
 			deviceRef.once("value")
 				.then((snapshot) => {
 					var device = req.intent.slot("device");
