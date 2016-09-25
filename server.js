@@ -45,8 +45,7 @@ var app = alexa.app("ForceHome")
 	.onIntent("LinkDevice", (req, res) => {
 		devId = req.intent.slot("devId");
 		deviceRef = db.ref("devices/ARTIK-" + devId);
-		res.prompt("ARTIK device " + devId + " is linked!")
-			.send();
+		res.prompt("ARTIK device " + devId + " is linked!").send();
 	})
 	.onIntent("OverallStatus", (req, res) => {
 		if (!handleNoSession()) {
@@ -58,8 +57,7 @@ var app = alexa.app("ForceHome")
 					var resSoilMoisture = "Your plant's soil humidity is " + soilMoisture + "%."
 					var resAirQuality = " Your home's air quality " + resFromAirQuality(airQuality);
 					var resTemperature = " Your home's temperature is " + temperature + " fahrenheit.";
-					res.prompt(resSoilMoisture + resAirQuality + resTemperature)
-						.send();
+					res.prompt(resSoilMoisture + resAirQuality + resTemperature).send();
 				});
 		}
 	})
@@ -88,22 +86,22 @@ var app = alexa.app("ForceHome")
 	.onIntent("UnlinkDevice", (req, res) => {
 		deviceRef = null;
 		devId = -1;
-		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
+		res.prompt("ARTIK device has been unlinked! Goodbye").send();
 	})
 	.onIntent("AMAZON.StopIntent", function(req, res) {
 		deviceRef = null;
 		devId = -1
-		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
+		res.prompt("ARTIK device has been unlinked! Goodbye").send();
 	})
 	.onIntent("AMAZON.CancelIntent", function(req, res) {
 		deviceRef = null;
 		devId = -1;
-		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
+		res.prompt("ARTIK device has been unlinked! Goodbye").send();
 	})
 	.onSessionEnd((req, res) => {
 		deviceRef = null;
 		devId = -1;
-		res.prompt("ARTIK device " + devId + " is unlinked! Goodbye").send();
+		res.prompt("ARTIK device has been unlinked! Goodbye").send();
 	})
 	.host("/api", PORT, false);
 
